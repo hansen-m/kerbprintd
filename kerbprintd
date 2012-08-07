@@ -23,8 +23,8 @@ if [ -e /etc/cups/printers.conf ];then
 			echo "`date "$DATEFORMAT"` - "$SCRIPT" - "$PRINTER" - Enabled"
 		fi
 		
-		## 10.7 Lion fix for printers with spaces in the server queue name
-		if `sw_vers -productVersion | grep -q 10.7.` && `lpstat -v "$PRINTER" | awk -F smb:// '{print $2}' | grep -q ' '`;then
+		## 10.7+ workaround for errors caused by printers with spaces in the server queue name
+		if `lpstat -v "$PRINTER" | awk -F smb:// '{print $2}' | grep -q ' '`;then
 			URIWOSPACES=`lpstat -v "$PRINTER" | awk -F smb:// '{print $2}' | sed 's/ /%20/g'`
 			lpadmin -p "$PRINTER" -v smb://"$URIWOSPACES"
 		fi
