@@ -1,0 +1,4 @@
+#!/bin/bash
+[ -e /Library/LaunchDaemons/edu.psu.educ.kerbprintd.plist ] && launchctl unload /Library/LaunchDaemons/edu.psu.educ.kerbprintd.plist
+
+exit 0
